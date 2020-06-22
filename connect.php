@@ -1,8 +1,8 @@
 <?php
     $_host = "localhost";
-    $_user = "pkwcemercy";
-    $_pass = "E,+[9Od)xptK";
-    $_db   = "pkwcemercy_db.109";
+    $_user = "root";
+    $_pass = "";
+    $_db   = "db_pariwisata";
 
     $connect = new mysqli($_host,$_user,$_pass,$_db);
 

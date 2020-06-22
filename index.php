@@ -279,7 +279,7 @@ include("connect.php"); ?>
             <div class="row">
                 <a href="https://www.instagram.com/4k1117/?hl=id" target="_blank">
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6" style="margin-left: 150px;">
-                        <div class="thumbnail"><img class="img-circle" src="assets/img/profil_arya.jpg" style="padding: 20px;">
+                        <div class="thumbnail"><img class="img-circle" src="assets/img/profil_arya1.jpg" style="padding: 20px;">
                             <div class="caption">
                                 <h3 style="font-size: 22px;">Abdul Eriawan Nahar</h3>
                                 <p class="text-center">Front-End Developer</p>
@@ -289,7 +289,7 @@ include("connect.php"); ?>
                 </a>
                 <a href="https://www.instagram.com/miftahjailanii/?hl=id" target="_blank">
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                        <div class="thumbnail"><img class="img-circle" src="assets/img/profil_miftah.PNG" style="padding: 20px;">
+                        <div class="thumbnail"><img class="img-circle" src="assets/img/profil_miftah2.jpg" style="padding: 20px;">
                             <div class="caption">
                                 <h3 style="font-size: 22px;">Miftah Jailani Nasution</h3>
                                 <p class="text-center">Front-End Developer</p>
