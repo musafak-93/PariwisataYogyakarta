@@ -194,6 +194,9 @@ i.glyphicon.glyphicon-search{
   background-color: #0f1517;
 }
 
+.more{
+  display: none;
+}
 #more1{
   display: none;
 }

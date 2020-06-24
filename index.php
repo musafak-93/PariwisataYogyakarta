@@ -353,7 +353,6 @@ include("connect.php"); ?>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         var a = 0;
-
         function read1() {
             if (!a) {
                 document.getElementById("more1").style.display = "inline";
@@ -368,7 +367,6 @@ include("connect.php"); ?>
             }
         }
         var b = 0;
-
         function read2() {
             if (!b) {
                 document.getElementById("more2").style.display = "inline";
@@ -383,7 +381,6 @@ include("connect.php"); ?>
             }
         }
         var c = 0;
-
         function read3() {
             if (!c) {
                 document.getElementById("more3").style.display = "inline";
@@ -398,7 +395,6 @@ include("connect.php"); ?>
             }
         }
         var d = 0;
-
         function read4() {
             if (!d) {
                 document.getElementById("more4").style.display = "inline";
