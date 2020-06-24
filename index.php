@@ -40,6 +40,147 @@ include("connect.php"); ?>
                 transform: scale(1)
             }
         }
+
+        .rowGallery:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+
+        /* Hide the images by default */
+        .mySlides {
+            display: none;
+        }
+
+        /* Add a pointer when hovering over the thumbnail images */
+        .cursor {
+            cursor: pointer;
+        }
+
+
+        /* Container for image text */
+        .caption-container {
+            text-align: center;
+            background-color: #222;
+            padding: 2px 16px;
+            color: white;
+        }
+
+        /* Six columns side by side */
+        .column {
+            float: left;
+            width: 16.66%;
+        }
+
+        /* Add a transparency effect for thumnbail images */
+        .demo {
+            opacity: 0.6;
+        }
+
+        .active,
+        .demo:hover {
+            opacity: 1;
+        }
+
+        /* modal */
+
+        .modalM {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            padding-top: 100px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+
+        .modalM-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 80%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s
+        }
+
+        /* Add Animation */
+
+        @-webkit-keyframes animatetop {
+            from {
+                top: -300px;
+                opacity: 0
+            }
+
+            to {
+                top: 0;
+                opacity: 1
+            }
+        }
+
+        @keyframes animatetop {
+            from {
+                top: -300px;
+                opacity: 0
+            }
+
+            to {
+                top: 0;
+                opacity: 1
+            }
+        }
+
+        /* The Close Button */
+
+        .closeM {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .closeM:hover,
+        .closeM:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modalM-header {
+            padding: 2px 16px;
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        .modalM-body {
+            padding: 2px 16px;
+        }
+
+        .modalM-footer {
+            padding: 2px 16px;
+            background-color: #5cb85c;
+            color: white;
+        }
     </style>
 </head>
 
@@ -131,99 +272,67 @@ include("connect.php"); ?>
     <!-- container news -->
     <div id="news">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                    <div class="thumbnail"><img src="assets/img/indrayanti.jpg">
-                        <div class="caption">
-                            <h3 style="font-size: 22px;">Pantai Indrayanti</h3>
-                            <p class="text-justify">Pantai Pulang Sawal (Pantai Indrayanti) atau disingkat dengan Pantai Pulsa adalah
-                                salah satu pantai yang menarik dan eksotis berada di Dusun Ngasem, Desa Sidoharjo, Kecamatan Tepus,
-                                Kabupaten Gunung Kidul, Daerah Istimewa <span id="dots1">...</span> <span id="more1">Yogyakarta. Lokasi
-                                    Pantai Indrayanti, Kabupaten Gunungkidul
-                                    terletak tepat di sisi timur Pantai Sundak. Keduanya dibatasi oleh perbukitan karang. Pantai
-                                    Indarayati ini juga menawarkan keindahan panorama yang unik dibanding pantai-pantai lain di
-                                    Gunungkidul.</span>
-                            </p>
-                            <button class="btn btn-default" id="read1" type="button" onclick="read1()">Read More</button>
+            <div class="row" style="padding-top: 1cm;">
+                <?php
+                include 'connect.php';
+                $getWisata = $connect->query("SELECT * FROM wisata");
+                while ($fetchWisata = $getWisata->fetch_assoc()) {
+                ?>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <div class="thumbnail newsed"><img src="<?= $fetchWisata["wisata_image"] ?>" style="height: 200px; object-fit: cover;">
+                            <div class="caption">
+                                <h3 class="judul" style="font-size: 22px;"><?= $fetchWisata["Judul_wisata"] ?></h3>
+                                <h5> <?= $fetchWisata["alamat_wisata"] ?></h5>
+                                <p class="descriptionWisata" style="height: 1cm;"><?= $fetchWisata["info_wisata"] ?></p>
+                                <!-- <button class="btn btn-default" id="read1" type="button" onclick="read1()">Read More</button><br> -->
+                                <button class="myBtnModal">Read more</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                    <div class="thumbnail"><img src="assets/img/kedungpedhut.jpg">
-                        <div class="caption">
-                            <h3 style="font-size: 22px;">Kedung Pedhut</h3>
-                            <p class="text-justify">Sebuah lembah yang terletak di Desa Jatimulyo,
-                                Kecamatan Girimulyo, Kabupaten Kulon Progo, Yogyakarta. Air jernih dan kebiruan dari Gunung Kelir,
-                                sebuah gunung kapur di antara Kulonprogo dan Purworejo, mengalir sepanjang sungai dan melintasi
-                                <span id="dots2">...</span> <span id="more2">riam serta menciptakan air terjun bertingkat-tingkat hingga
-                                    ratusan meter, dari ukuran setinggi pintu
-                                    maupun air terjun belasan meter. Tempat ini dinamai Kedung Pedut, salah satu andalan Kulon Progo.
-                                    Panorama
-                                    lembah, riam dan jeram serta airnya bak lukisan. Wisatawan yang datang pasti tergoda untuk langsung
-                                    berendam serta berkecipak di sungai itu.</span>
-                            </p>
-                            <button class="btn btn-default" id="read2" type="button" onclick="read2()">Read More</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                    <div class="thumbnail"><img src="assets/img/kalibiru.jpg">
-                        <div class="caption">
-                            <h3 style="font-size: 22px;">Kalibiru</h3>
-                            <p class="text-justify">Kalibiru adalah salah satu wisata alam yang cukup populer di Kabupaten Kulonprogo.
-                                Wisata alam hutan ini memiliki tanah yang bergelombang dan disekelilingnya terdapat banyak bukit dalam
-                                area hutan lindung. Wisata Alam <span id="dots3">...</span> <span id="more3">Kalibiru ini berada pada
-                                    ketinggian 450 M dpl. Pemandangan alamnya yang sangat indah dan suhu udara yang sangat sejuk karena belum tercemar oleh polusi udara
-                                    menjadi salah satu daya tarik kawasan wisata alam ini.</span>
-                            </p>
-                            <button class="btn btn-default" id="read3" type="button" onclick="read3()">Read More</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                    <div class="thumbnail"><img src="assets/img/hutanpinusmangunan.jpg">
-                        <div class="caption">
-                            <h3 style="font-size: 22px;">Hutan Pinus Mangunan</h3>
-                            <p class="text-justify">Hutan Pinus Mangunan merupakan destinasi wisata alam yang berada di daerah Bantul
-                                yang dijadikan sebagai salah satu tempat selfie yang diburu oleh banyak orang. Hutan Pinus Mangunan
-                                memiliki suasana yang dapat membuat pengunjung <span id="dots4">...</span> <span id="more4">merasa damai,
-                                    sangat asri, masih alami, serta dapat membuat hati tenang. Terdapat banyak deretan pohon pinus yang tumbuh subur di sepanjang hutan tersebut.
-                                    Hutan yang dikelola oleh RPH Mangunan (Resort Pengelolaan Hutan) ini memiliki banyak keunikan. Luas
-                                    hutan ini mencapai 500 hektar dan banyak tumbuh pepohonan yang tinggi yang membuat suasana hati
-                                    menjadi sejuk dan tenang. Hutan Pinus Mangunan juga sering dikenal dengan Hutan Pinus Imogiri, karena
-                                    hutan tersebut berdekatan dengan Makam Raja-raja Imogiri.</span>
-                            </p>
-                            <button class="btn btn-default" id="read4" type="button" onclick="read4()">Read More</button>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </div>
+    </div>
     <!-- container news -->
+
 
     <!-- gallery -->
     <div id="gallery">
         <div class="container">
             <h1>Gallery</h1>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="satu">
-                    <img class="img-responsive" src="assets/img/gambar-3-A.jpg">
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="satu">
-                    <img class="img-responsive" src="assets/img/malioboro.jpg">
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="satu">
-                    <img class="img-responsive" src="assets/img/tugujogja.jpg">
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding-top:31px;">
-                    <img class="img-responsive" src="assets/img/bunkerkaliadem.jpg">
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding-top:31px;">
-                    <img class="img-responsive" src="assets/img/pantaingrenehan1.jpg">
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="dua">
-                    <img class="img-responsive" src="assets/img/alkid.jpg">
+
+            <div class="container">
+                <?php
+                include 'connect.php';
+                $getWisata = $connect->query("SELECT * FROM wisata");
+                while ($fetchWisata = $getWisata->fetch_assoc()) {
+                ?>
+                    <div class="mySlides">
+                        <img src="<?= $fetchWisata["wisata_image"] ?>" style="width:100%; height: 500px; object-fit: cover;">
+                    </div>
+
+                <?php
+                }
+                ?>
+
+                <div class="rowGallery ">
+                    <?php
+                    include 'connect.php';
+                    $getWisata = $connect->query("SELECT * FROM wisata");
+                    $index = 1;
+                    while ($fetchWisata = $getWisata->fetch_assoc()) {
+                    ?>
+                        <div class="column">
+                            <img class="demo cursor" src="<?= $fetchWisata["wisata_image"] ?>" style="width:100%; height: 100px; object-fit: cover;" onclick="currentSlide(<?= $index ?>)" alt="<?= $fetchWisata["Judul_wisata"] ?>">
+                        </div>
+                    <?php
+                        $index++;
+                    }
+                    ?>
+
                 </div>
             </div>
         </div>
@@ -352,61 +461,89 @@ include("connect.php"); ?>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        var a = 0;
-        function read1() {
-            if (!a) {
-                document.getElementById("more1").style.display = "inline";
-                document.getElementById("dots1").style.display = "none";
-                document.getElementById("read1").innerHTML = "Read less";
-                a = 1;
-            } else {
-                document.getElementById("more1").style.display = "none";
-                document.getElementById("dots1").style.display = "inline";
-                document.getElementById("read1").innerHTML = "Read more";
-                a = 0;
+        function validateCard() {
+            var strdeskripsi = document.getElementsByClassName("descriptionWisata");
+            var bttn = document.getElementsByClassName("myBtnModal");
+            var arrayNews = document.getElementsByClassName("newsed");
+            var judul = document.getElementsByClassName("judul");
+
+            for (let index = 0; index < arrayNews.length; index++) {
+                var panjang = judul[index].textContent;
+                var split = panjang.split("");
+                if (panjang.length >= 15) {
+                    var revjudul = "";
+                    for (let a = 0; a < 15; a++) {
+                        revjudul += split[a];
+
+                    }
+                    judul[index].innerHTML = revjudul + "...";
+                    bttn[index].style.visibility = 'visible';
+
+                } else if (panjang.length < 15) {
+                    bttn[index].style.visibility = 'hidden';
+                }
+            }
+
+            for (let index = 0; index < arrayNews.length; index++) {
+                var panjang = strdeskripsi[index].textContent;
+                var split = panjang.split("");
+                if (panjang.length >= 17) {
+                    var revdes = "";
+                    for (let a = 0; a < 17; a++) {
+                        revdes += split[a];
+                        bttn[index].style.visibility = 'hidden';
+
+                    }
+                    strdeskripsi[index].innerHTML = revdes + `...`;
+                    bttn[index].style.visibility = 'visible';
+
+                } else if (panjang.length < 15) {
+                    bttn[index].style.visibility = 'hidden';
+                }
             }
         }
-        var b = 0;
-        function read2() {
-            if (!b) {
-                document.getElementById("more2").style.display = "inline";
-                document.getElementById("dots2").style.display = "none";
-                document.getElementById("read2").innerHTML = "Read less";
-                b = 1;
-            } else {
-                document.getElementById("more2").style.display = "none";
-                document.getElementById("dots2").style.display = "inline";
-                document.getElementById("read2").innerHTML = "Read more";
-                b = 0;
-            }
+
+        validateCard();
+
+
+
+        function showImg(imgs) {
+            var expandImg = document.getElementById("expandedImg");
+            var imgText = document.getElementById("imgtext");
+            expandImg.src = imgs.src;
+            imgText.innerHTML = imgs.alt;
+            expandImg.parentElement.style.display = "block";
         }
-        var c = 0;
-        function read3() {
-            if (!c) {
-                document.getElementById("more3").style.display = "inline";
-                document.getElementById("dots3").style.display = "none";
-                document.getElementById("read3").innerHTML = "Read less";
-                c = 1;
-            } else {
-                document.getElementById("more3").style.display = "none";
-                document.getElementById("dots3").style.display = "inline";
-                document.getElementById("read3").innerHTML = "Read more";
-                c = 0;
-            }
+
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
         }
-        var d = 0;
-        function read4() {
-            if (!d) {
-                document.getElementById("more4").style.display = "inline";
-                document.getElementById("dots4").style.display = "none";
-                document.getElementById("read4").innerHTML = "Read less";
-                d = 1;
-            } else {
-                document.getElementById("more4").style.display = "none";
-                document.getElementById("dots4").style.display = "inline";
-                document.getElementById("read4").innerHTML = "Read more";
-                d = 0;
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("demo");
+            if (n > slides.length) {
+                slideIndex = 1
             }
+            if (n < 1) {
+                slideIndex = slides.length
+            }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
         }
     </script>
 </body>

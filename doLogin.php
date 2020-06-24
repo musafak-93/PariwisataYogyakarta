@@ -21,7 +21,7 @@ if (isset($_POST["inputEmail"])) {
 
         if($result->num_rows==1){
             setcookie("adminID",$result->fetch_assoc()["adminID"]);
-            header("location:home.php");
+            header("location:home_admin.php");
             exit();
 
         }else{

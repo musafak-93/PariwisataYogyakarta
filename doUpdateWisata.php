@@ -32,7 +32,7 @@
         $message = "Succesfully Edit new wisata!";
     }
     $_SESSION["message"] = $message;
-    header("location:update.php?id=".$Id_wisata);
+    header("location:home_admin.php?id=".$Id_wisata);
     exit();
 }
 header("location:insert.php");

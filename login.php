@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_COOKIE["adminID"])) {
-    header("location:home.php");
+    header("location:home_admin.php");
     exit();
 }
 ?>
@@ -190,7 +190,7 @@ if (isset($_COOKIE["adminID"])) {
 
                 <div class="container">
                     <center>
-                    <label for="titleLogin" style="font-size: 50px;"><b>Login</b> </label><br>
+                        <label for="titleLogin" style="font-size: 50px;"><b>Login</b> </label><br>
 
                     </center>
                     <label for="uname"><b>Username</b></label>
