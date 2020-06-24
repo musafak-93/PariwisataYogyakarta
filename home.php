@@ -127,12 +127,38 @@ include("connect.php"); ?>
         </div>
     </div>
     <!-- container bawah -->
-
     <!-- container news -->
     <div id="news">
+        <?php
+        include 'connect.php';
+        $getWisata = $connect->query("SELECT * FROM wisata");
+        while ($fetchWisata = $getWisata->fetch_assoc()) {
+        ?>
+            <table style="display:inline-table;width:200px">
+                <tr>
+                    <td><img style="width:100%" src="<?= $fetchWisata["wisata_image"] ?>"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong><?= $fetchWisata["Judul_wisata"] ?></strong> <br />
+                        <?= $fetchWisata["info_wisata"] ?> <br /><br />
+                        <?= $fetchWisata["alamat_wisata"] ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="update.php?id=<?= $fetchWisata["Id_wisata"] ?>"><button>Update</button></a>
+                        <a href="delete.php?id=<?= $fetchWisata["Id_wisata"] ?>"><button>Delete</button></a>
+
+                    </td>
+                </tr>
+            </table>
+        <?php
+        }
+        ?>
         <div class="container">
             <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                     <div class="thumbnail"><img src="assets/img/indrayanti.jpg">
                         <div class="caption">
                             <h3 style="font-size: 22px;">Pantai Indrayanti</h3>
@@ -375,6 +401,7 @@ include("connect.php"); ?>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         var i = 0;
+
         function read() {
             if (!i) {
                 document.getElementsByClassName("more").style.display = "inline";
@@ -389,6 +416,7 @@ include("connect.php"); ?>
             }
         }
         var a = 0;
+
         function read1() {
             if (!a) {
                 document.getElementById("more1").style.display = "inline";
@@ -403,6 +431,7 @@ include("connect.php"); ?>
             }
         }
         var b = 0;
+
         function read2() {
             if (!b) {
                 document.getElementById("more2").style.display = "inline";
@@ -417,6 +446,7 @@ include("connect.php"); ?>
             }
         }
         var c = 0;
+
         function read3() {
             if (!c) {
                 document.getElementById("more3").style.display = "inline";
@@ -431,6 +461,7 @@ include("connect.php"); ?>
             }
         }
         var d = 0;
+
         function read4() {
             if (!d) {
                 document.getElementById("more4").style.display = "inline";
